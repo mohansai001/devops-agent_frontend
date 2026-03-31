@@ -64,7 +64,7 @@ export const retryRequest = async (id: string): Promise<void> => {
 };
 
 export const openLogStream = (id: string): EventSource => {
-  const base = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api';
+  const base = import.meta.env.VITE_API_BASE_URL || 'https://devops-backend-6c9x.onrender.com/api';
   return new EventSource(`${base}/approvals/${id}/logs`, { withCredentials: true });
 };
 
