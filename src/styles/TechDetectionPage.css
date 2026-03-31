@@ -1,0 +1,93 @@
+/* TechDetectionPage.css */
+.tech-root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 50%, #eef2ff 100%);
+  padding: 24px;
+}
+.tech-title {
+  max-width: 280px;
+  margin: 4px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Steps panel */
+.tech-steps-panel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+/* Step icon */
+.tech-step-icon.pending { border: 2px solid #d1d5db; }
+.tech-step-icon.running { border: 2px solid #009688; }
+.tech-step-icon.done    { border: 2px solid #22c55e; background: rgba(34,197,94,0.08); }
+.tech-step-icon.error   { border: 2px solid #ef4444; }
+
+/* Step label */
+.tech-step-label.pending { color: #000000; }
+.tech-step-label.running { color: #000000; font-weight: 600; }
+.tech-step-label.done    { color: #000000; }
+.tech-step-label.error   { color: #dc2626; }
+
+/* Step status */
+.tech-step-status-running { color: #009688; margin-left: auto; font-size: 12px; }
+.tech-step-status-done    { color: #22c55e; margin-left: auto; font-size: 12px; }
+
+/* Tech stack card */
+.tech-stack-panel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 12px;
+}
+.tech-stack-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 10px !important;
+  color: #000000 !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+}
+
+/* Tech chips */
+.tech-chip-language  { background: rgba(59,130,246,0.1) !important;  color: #2563eb !important; border: 1px solid rgba(59,130,246,0.25) !important; }
+.tech-chip-framework { background: rgba(139,92,246,0.1) !important;  color: #7c3aed !important; border: 1px solid rgba(139,92,246,0.25) !important; }
+.tech-chip-build     { background: rgba(0,150,136,0.1) !important;   color: #00897b !important; border: 1px solid rgba(0,150,136,0.25) !important; }
+.tech-chip-docker    { background: rgba(14,165,233,0.1) !important;  color: #0284c7 !important; border: 1px solid rgba(14,165,233,0.25) !important; }
+.tech-chip-helm      { background: rgba(245,158,11,0.1) !important;  color: #d97706 !important; border: 1px solid rgba(245,158,11,0.25) !important; }
+.tech-chip-terraform { background: rgba(139,92,246,0.1) !important;  color: #7c3aed !important; border: 1px solid rgba(139,92,246,0.25) !important; }
+
+/* Error alert */
+.tech-error-alert {
+  margin-top: 8px;
+  background: rgba(239,68,68,0.06) !important;
+  color: #dc2626 !important;
+  border: 1px solid rgba(239,68,68,0.2) !important;
+  font-size: 0.85em;
+  border-radius: 8px;
+}
+
+/* Toast */
+.tech-toast-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 8px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 8px rgba(34,197,94,0.1);
+  font-size: 0.85em;
+  color: #15803d;
+}
