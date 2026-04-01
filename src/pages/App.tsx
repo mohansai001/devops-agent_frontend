@@ -39,7 +39,7 @@ const AppRoutes: React.FC = () => (
     <Route path="/security"                 element={<SecurityResultsPage />}        />
     <Route path="/builds"                   element={<BuildDashboardPage />}         />
     <Route path="/build-status"             element={<BuildStatusPage />}            />
-    <Route path="/"                         element={<Navigate to="/dashboard" replace />} />
+    <Route path="/"                         element={<Navigate to="/login" replace />} />
   </Routes>
 );
 
