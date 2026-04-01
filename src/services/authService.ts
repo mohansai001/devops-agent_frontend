@@ -6,7 +6,7 @@ export interface CurrentUser {
 }
 
 export const startGithubLogin = (): void => {
-  window.location.href = '/api/auth/github';
+  window.location.href = 'https://devops-backend-6c9x.onrender.com/api/auth/github';
 };
 
 export const getCurrentUser = async (): Promise<CurrentUser> => {
