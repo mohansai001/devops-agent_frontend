@@ -148,7 +148,7 @@ export const ProvisioningPage: React.FC = () => {
 
   return (
     <Box className="prov-root">
-      <Box maxWidth={860} mx="auto" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Box maxWidth={1200} mx="auto" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
 
         {/* Header */}
         <Box flexShrink={0} mb={0.5}>
