@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://devops-backend-6c9x.onrender.com/api';
 
@@ -7,13 +7,4 @@ export const httpClient = axios.create({
   withCredentials: true,
 });
 
-// Redirect to login on 401
-httpClient.interceptors.response.use(
-  (response: AxiosResponse) => response,
-  (error: AxiosError) => {
-    if (error.response?.status === 401 && window.location.pathname !== '/login') {
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  },
-);
+
