@@ -177,7 +177,7 @@ function Onboarding() {
         {/* Header */}
         <Box display="flex" alignItems="center" justifyContent="space-between" mb={2} flexWrap="wrap" gap={1}>
           <Box>
-            <Typography variant="h4" fontWeight={700} color="primary.dark">
+            <Typography variant="h6" fontWeight={700} color="primary.dark">
               Your Repositories
             </Typography>
             {!loading && !error && (
@@ -195,6 +195,7 @@ function Onboarding() {
               startIcon={onboardingAll ? <CircularProgress size={14} color="inherit" /> : <DoneAllIcon />}
               onClick={handleOnboardAll}
               disabled={onboardingAll || repos.length === 0}
+              sx={{ color: '#ffffff !important' }}
             >
               {onboardingAll ? 'Onboarding...' : 'Onboard All Repos'}
             </Button>
@@ -251,10 +252,9 @@ function Onboarding() {
               </Paper>
               <Button
                 variant="contained" color="primary" size="small"
-                startIcon={onboardingRepo === repo.id ? <CircularProgress size={14} color="inherit" /> : <RocketLaunchIcon />}
                 onClick={() => handleOnboard(repo)}
                 disabled={onboardingRepo === repo.id}
-                sx={{ flexShrink: 0, px: 2, py: 1, whiteSpace: 'nowrap' }}
+                sx={{ flexShrink: 0, px: 2, py: 1, whiteSpace: 'nowrap', color: '#ffffff !important' }}
               >
                 {onboardingRepo === repo.id ? 'Onboarding...' : 'Onboard'}
               </Button>
