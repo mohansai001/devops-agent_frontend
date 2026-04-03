@@ -17,17 +17,19 @@ import { FailedPipelinesPage } from './FailedPipelinesPage';
 import { ApprovalsPage } from './ApprovalsPage';
 import { BuildDashboardPage } from './BuildDashboardPage';
 import { BuildStatusPage } from './BuildStatusPage';
+import Onboarding from './Onboarding.jsx';
 
 const HEADER_HEIGHT = 64; // px — matches AppBar height
 
 // Pages that should scroll (approvals has dynamic content)
-const SCROLLABLE_ROUTES = ['/approvals'];
+const SCROLLABLE_ROUTES = ['/approvals', '/onboarding'];
 
 const AppRoutes: React.FC = () => (
   <Routes>
     <Route path="/dashboard"              element={<DashboardPage />}              />
     <Route path="/approvals"               element={<ApprovalsPage />}              />
     <Route path="/repos"                    element={<RepoSelectionPage />}          />
+    <Route path="/onboarding"               element={<Onboarding />}                 />
     <Route path="/deploy-config"            element={<DeployConfigPage />}           />
     <Route path="/provisioning"             element={<ProvisioningPage />}           />
     <Route path="/tech-detection"           element={<TechDetectionPage />}          />

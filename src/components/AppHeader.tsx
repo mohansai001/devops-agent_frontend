@@ -13,6 +13,7 @@ const NAV_TABS: NavTab[] = [
   { label: 'Dashboard',       path: '/dashboard'        },
   { label: 'Approvals',        path: '/approvals'        },
   { label: 'Repositories',     path: '/repos'            },
+  { label: 'Onboarding',       path: '/onboarding'       },
   { label: 'Deployments',      path: '/deployments'      },
   { label: 'Builds',           path: '/builds'           },
   { label: 'Failed Pipelines', path: '/failed-pipelines' },
