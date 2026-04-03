@@ -28,6 +28,7 @@ function Onboarding() {
   const [currWebhookUrl, setCurrWebhookUrl] = useState('');
   const [webhookSubmitting, setWebhookSubmitting] = useState(false);
   const [webhookSuccess, setWebhookSuccess] = useState(false);
+  const [webhookUpdating, setWebhookUpdating] = useState(false);
   const [onboardingAll, setOnboardingAll] = useState(false);
   const [onboardingRepo, setOnboardingRepo] = useState(null);
   const [snackbar, setSnackbar] = useState({ open: false, message: '' });
@@ -109,6 +110,7 @@ function Onboarding() {
   const handleWebhookClose = () => { setWebhookOpen(false); setWebhookUrl(''); setWebhookSuccess(false); };
 
   const handleUpdate = async () => {
+    setWebhookUpdating(true);
     const pat = import.meta.env.VITE_GITHUB_PAT || '';
     const base = import.meta.env.VITE_API_BASE_URL || ' https://repo-onboard-full.onrender.com';
     try {
@@ -140,6 +142,7 @@ function Onboarding() {
       console.error(e);
       setSnackbar({ open: true, message: 'Failed to update some webhooks.' });
     } finally {
+      setWebhookUpdating(false);
       handleWebhookClose();
     }
   };
@@ -204,6 +207,15 @@ function Onboarding() {
         {error && <Alert severity="error">{error}</Alert>}
 
         {/* Repo List */}
+        {onboardingAll && (
+          <Box display="flex" alignItems="center" gap={1.5} mb={2} px={2} py={1.5}
+            sx={{ bgcolor: 'rgba(0,150,136,0.06)', border: '1px solid rgba(0,150,136,0.2)', borderRadius: 2 }}>
+            <CircularProgress size={16} sx={{ color: '#009688' }} />
+            <Typography variant="body2" color="#009688" fontWeight={600}>
+              Onboarding all {repos.length} repositories, please wait...
+            </Typography>
+          </Box>
+        )}
         <Stack spacing={1.5}>
           {paginated.map(repo => (
             <Box key={repo.id} display="flex" alignItems="center" gap={2}>
@@ -317,9 +329,14 @@ function Onboarding() {
               </Button>
             </>
           ) : (
-            <Button variant="contained" color="primary" onClick={handleUpdate} fullWidth>
-              Update
-            </Button>
+            <>
+              <Button variant="outlined" color="inherit" onClick={handleWebhookClose} fullWidth disabled={webhookUpdating}>Cancel</Button>
+              <Button variant="contained" color="primary" onClick={handleUpdate} fullWidth
+                disabled={webhookUpdating}
+                startIcon={webhookUpdating ? <CircularProgress size={14} color="inherit" /> : null}>
+                {webhookUpdating ? 'Updating...' : 'Update'}
+              </Button>
+            </>
           )}
         </DialogActions>
       </Dialog>
