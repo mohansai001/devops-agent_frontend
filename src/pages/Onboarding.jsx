@@ -222,10 +222,11 @@ function Onboarding() {
             <Box key={repo.id} display="flex" alignItems="center" gap={2}>
               <Paper
                 elevation={0}
+                onClick={() => window.open(repo.html_url, '_blank', 'noopener noreferrer')}
                 sx={{
                   flex: 1, border: '1px solid', borderColor: 'divider', borderRadius: 3,
                   px: 2, py: 1.25, display: 'flex', alignItems: 'center', gap: 2,
-                  bgcolor: 'background.paper', transition: 'box-shadow 0.2s',
+                  bgcolor: 'background.paper', transition: 'box-shadow 0.2s', cursor: 'pointer',
                   '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)' },
                 }}
               >
@@ -235,6 +236,15 @@ function Onboarding() {
                   <Typography variant="body2" color="text.secondary" noWrap sx={{ mt: 0.25 }}>
                     {repo.description || 'No description'}
                   </Typography>
+                  <Box display="flex" alignItems="center" gap={1} mt={0.5} flexWrap="wrap">
+                    <Chip size="small" label={`Stars ${repo.stargazers_count ?? 0}`} variant="outlined" sx={{ fontSize: 10, height: 20 }} />
+                    <Chip size="small" label={`Forks ${repo.forks_count ?? 0}`} variant="outlined" sx={{ fontSize: 10, height: 20 }} />
+                    <Chip size="small" label={`Watchers ${repo.watchers_count ?? 0}`} variant="outlined" sx={{ fontSize: 10, height: 20 }} />
+                    <Chip size="small" label={`Open Issues ${repo.open_issues_count ?? 0}`} variant="outlined" sx={{ fontSize: 10, height: 20 }} />
+                    {repo.updated_at && (
+                      <Chip size="small" label={`Updated ${new Date(repo.updated_at).toLocaleDateString()}`} variant="outlined" sx={{ fontSize: 10, height: 20 }} />
+                    )}
+                  </Box>
                 </Box>
                 <Divider orientation="vertical" flexItem />
                 <Box display="flex" alignItems="center" gap={1} flexShrink={0}>

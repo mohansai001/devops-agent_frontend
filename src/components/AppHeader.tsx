@@ -35,7 +35,7 @@ export const AppHeader: React.FC = () => {
   return (
     <AppBar position="fixed" elevation={0} className="header-root">
       <Toolbar>
-        <Typography className="header-brand">
+        <Typography className="header-brand" sx={{ color: '#ffffff !important' }}>
           DevOps Agent
         </Typography>
 
@@ -59,6 +59,7 @@ export const AppHeader: React.FC = () => {
           startIcon={<LogoutIcon />}
           onClick={handleLogout}
           className="header-logout-btn"
+          sx={{ color: '#ffffff !important' }}
         >
           Logout
         </Button>
