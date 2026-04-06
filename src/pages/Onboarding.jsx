@@ -34,7 +34,7 @@ function Onboarding() {
   const [snackbar, setSnackbar] = useState({ open: false, message: '' });
 
   useEffect(() => {
-    const base = import.meta.env.VITE_API_BASE_URL || ' https://repo-onboard-full.onrender.com';
+    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
     fetch(`${base}/config/webhook-url`)
       .then(res => res.json())
       .then(data => setCurrWebhookUrl(data.CURR_WEBHOOK_URL))
@@ -43,7 +43,7 @@ function Onboarding() {
 
   useEffect(() => {
     const pat = import.meta.env.VITE_GITHUB_PAT || '';
-    const base = import.meta.env.VITE_API_BASE_URL || ' https://repo-onboard-full.onrender.com';
+    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
     fetch(`${base}/repos?pat=${pat}`)
       .then(res => {
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
@@ -60,7 +60,7 @@ function Onboarding() {
   const handleOnboard = async (repo) => {
     setOnboardingRepo(repo.id);
     const pat = import.meta.env.VITE_GITHUB_PAT || '';
-    const base = import.meta.env.VITE_API_BASE_URL || ' https://repo-onboard-full.onrender.com';
+    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
     try {
       await fetch(`${base}/webhook/create`, {
         method: 'POST',
@@ -83,7 +83,7 @@ function Onboarding() {
   const handleOnboardAll = async () => {
     setOnboardingAll(true);
     const pat = import.meta.env.VITE_GITHUB_PAT || '';
-    const base = import.meta.env.VITE_API_BASE_URL || ' https://repo-onboard-full.onrender.com';
+    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
     try {
       await Promise.all(
         repos.map(repo =>
@@ -112,7 +112,7 @@ function Onboarding() {
   const handleUpdate = async () => {
     setWebhookUpdating(true);
     const pat = import.meta.env.VITE_GITHUB_PAT || '';
-    const base = import.meta.env.VITE_API_BASE_URL || ' https://repo-onboard-full.onrender.com';
+    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
     try {
       // Step 1: Get PREV_WEBHOOK_URL and CURR_WEBHOOK_URL
       const configRes = await fetch(`${base}/config/webhook-url`);
@@ -150,7 +150,7 @@ function Onboarding() {
   const handleWebhookSave = async () => {
     setWebhookSubmitting(true);
     const pat = import.meta.env.VITE_GITHUB_PAT || '';
-    const base = import.meta.env.VITE_API_BASE_URL || ' https://repo-onboard-full.onrender.com';
+    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
     try {
       await fetch(`${base}/config/webhook-url`, {
         method: 'POST',

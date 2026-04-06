@@ -19,9 +19,10 @@ import {
 // ── Stage definitions ────────────────────────────────────────────────────────
 const STAGES = [
   { num: 1, label: 'Tech Detection',    desc: 'Scanning repository for language, framework and build tool' },
-  { num: 2, label: 'Terraform',         desc: 'Provisioning cloud infrastructure from centralized modules' },
-  { num: 3, label: 'CI/CD Pipeline',    desc: 'Generating and committing workflow YAML, pushing secrets' },
-  { num: 4, label: 'GitHub Actions',    desc: 'Monitoring workflow run until completion' },
+  { num: 2, label: 'CI Pipeline',       desc: 'Generating and committing CI workflow YAML' },
+  { num: 3, label: 'Terraform',         desc: 'Provisioning cloud infrastructure from centralized modules' },
+  { num: 4, label: 'CD Pipeline',       desc: 'Generating and committing CD workflow YAML' },
+  { num: 5, label: 'GitHub Actions',    desc: 'Monitoring workflow run until completion' },
 ];
 
 function parseActionsStatus(logs: string[]): { status: string; elapsed: string | null } {
@@ -372,7 +373,7 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
                       </Typography>
                     )}
                     {/* For Actions stage show parsed status badge + link */}
-                    {s.num === 4 && logs.length > 0 && (() => {
+                    {s.num === 5 && logs.length > 0 && (() => {
                       const { status: wfStatus, elapsed } = parseActionsStatus(logs);
                       const wfColor = ACTIONS_STATUS_COLOR[wfStatus] ?? '#9ca3af';
                       return (
