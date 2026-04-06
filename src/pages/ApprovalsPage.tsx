@@ -109,7 +109,7 @@ const StageLogPanel: React.FC<{ logs: string[]; active: boolean }> = ({ logs, ac
       {active && (
         <Box display="flex" alignItems="center" gap={0.5} mt={0.5}>
           <CircularProgress size={8} sx={{ color: '#009688' }} />
-          <Typography variant="caption" color="#009688" fontSize={10}>running...</Typography>
+          <Typography variant="caption" color="#009688 !important" fontSize={10}>running...</Typography>
         </Box>
       )}
     </Box>
