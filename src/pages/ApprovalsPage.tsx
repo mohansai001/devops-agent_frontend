@@ -29,6 +29,10 @@ function parseActionsStatus(logs: string[]): { status: string; elapsed: string |
   let status = 'WAITING';
   let elapsed: string | null = null;
   for (const line of [...logs].reverse()) {
+    if (line.includes('GitHub Actions workflow complete') || line.includes('Workflow completed') || line.includes('Workflow succeeded')) {
+      status = 'COMPLETED';
+      break;
+    }
     const m = line.match(/Workflow status:\s*(\S+)/);
     if (m) { status = m[1]; }
     const e = line.match(/elapsed[:\s]+(\S+)/i);
@@ -53,8 +57,9 @@ const STATUS_COLOR: Record<string, string> = {
 };
 
 function stageState(stageNum: number, currentStage: number, status: string): 'done' | 'active' | 'failed' | 'waiting' {
+  if (status === 'done') return 'done';
   if (status === 'failed' && stageNum === currentStage) return 'failed';
-  if (stageNum < currentStage || (stageNum === currentStage && status === 'done')) return 'done';
+  if (stageNum < currentStage) return 'done';
   if (stageNum === currentStage) return 'active';
   return 'waiting';
 }
@@ -169,7 +174,7 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
   // Auto-expand Actions stage when an Actions run URL appears so users
   // immediately see workflow progress in the logs panel.
   useEffect(() => {
-    if (actionsUrl) setExpandedStage(4);
+    if (actionsUrl) setExpandedStage(5);
   }, [actionsUrl]);
 
   // Open SSE when running

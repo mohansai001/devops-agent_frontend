@@ -22,7 +22,7 @@ import Onboarding from './Onboarding.jsx';
 const HEADER_HEIGHT = 64; // px — matches AppBar height
 
 // Pages that should scroll (approvals has dynamic content)
-const SCROLLABLE_ROUTES = ['/approvals', '/onboarding', '/deployments'];
+const SCROLLABLE_ROUTES = ['/approvals', '/onboarding', '/deployments', '/failed-pipelines'];
 
 const AppRoutes: React.FC = () => (
   <Routes>
