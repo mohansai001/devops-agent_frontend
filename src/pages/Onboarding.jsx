@@ -14,6 +14,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import LinkIcon from '@mui/icons-material/Link';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import { httpClient } from '../services/httpClient';
 
 const PAGE_SIZE = 10;
 
@@ -42,17 +43,8 @@ function Onboarding() {
   }, []);
 
   useEffect(() => {
-    const pat = import.meta.env.VITE_GITHUB_PAT || '';
-    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
-    fetch(`${base}/repos?pat=${pat}`)
-      .then(res => {
-        if (!res.ok) throw new Error(`Server error: ${res.status}`);
-        const ct = res.headers.get('content-type');
-        if (!ct || !ct.includes('application/json'))
-          throw new Error(`Expected JSON but got: ${ct}`);
-        return res.json();
-      })
-      .then(data => setRepos(data.repos))
+    httpClient.get('/github/repositories')
+      .then(res => setRepos(res.data))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
@@ -66,7 +58,7 @@ function Onboarding() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          github_username: repo.owner.login,
+          github_username: repo.full_name.split('/')[0],
           repo_name: repo.name,
           pat,
           webhook_url: currWebhookUrl,
@@ -91,7 +83,7 @@ function Onboarding() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              github_username: repo.owner.login,
+              github_username: repo.full_name.split('/')[0],
               repo_name: repo.name,
               pat,
               webhook_url: currWebhookUrl,
@@ -127,7 +119,7 @@ function Onboarding() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              github_username: repo.owner.login,
+              github_username: repo.full_name.split('/')[0],
               repo_name: repo.name,
               pat,
               prev_webhook_url: prevUrl,

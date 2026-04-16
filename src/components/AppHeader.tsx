@@ -17,8 +17,6 @@ const NAV_TABS: NavTab[] = [
   { label: 'Deployments',      path: '/deployments'      },
   { label: 'Builds',           path: '/builds'           },
   { label: 'Failed Pipelines', path: '/failed-pipelines' },
-  { label: 'DORA',             path: '/dora'             },
-  { label: 'Security',         path: '/security'         },
 ];
 
 export const AppHeader: React.FC = () => {

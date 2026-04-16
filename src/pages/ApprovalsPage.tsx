@@ -341,10 +341,7 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
               state === 'active'  ? '#009688' :
               state === 'failed'  ? '#dc2626' : 'rgba(209,213,219,0.6)';
 
-            const labelColor =
-              state === 'done'    ? '#16a34a' :
-              state === 'active'  ? '#1a202c' :
-              state === 'failed'  ? '#dc2626' : '#9ca3af';
+            const labelColor = '#ffffff';
 
             return (
               <Box key={s.num} mb={0.5}>
@@ -356,15 +353,12 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
                   onClick={() => logs.length > 0 && setExpandedStage(isExpanded ? null : s.num)}
                 >
                   {/* dot / spinner */}
-                  <Box sx={{ width: 10, height: 10, borderRadius: '50%', flexShrink: 0,
-                    background: state === 'active' ? 'transparent' : dotColor,
-                    border: state === 'active' ? `2px solid ${dotColor}` : 'none',
-                    boxShadow: state === 'active' ? `0 0 8px ${dotColor}` : 'none',
-                  }}>
-                    {state === 'active' && (
-                      <CircularProgress size={10} sx={{ color: dotColor, mt: '-1px', ml: '-1px' }} />
-                    )}
-                  </Box>
+                  {state === 'active'
+                    ? <CircularProgress size={10} sx={{ color: '#009688', flexShrink: 0 }} />
+                    : <Box sx={{ width: 10, height: 10, borderRadius: '50%', flexShrink: 0,
+                        background: dotColor,
+                      }} />
+                  }
 
                   {/* label */}
                   <Box flex={1}>
@@ -534,9 +528,10 @@ export const ApprovalsPage: React.FC = () => {
 
   useEffect(() => {
     void fetchApprovals();
-    const interval = setInterval(() => void fetchApprovals(), 5000);
+    const interval = setInterval(() => void fetchApprovals(), 10000);
     return () => clearInterval(interval);
-  }, [fetchApprovals]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePollNow = async (): Promise<void> => {
     setPolling(true);
@@ -588,7 +583,7 @@ export const ApprovalsPage: React.FC = () => {
   const running  = approvals.filter((a) => a.status === 'running').length;
 
   return (
-    <Box sx={{ p: 3, maxWidth: 960, mx: 'auto' }}>
+    <Box sx={{ p: 3, width: '100%', boxSizing: 'border-box' }}>
       {/* ── Page header ── */}
       <Box display="flex" alignItems="flex-start" justifyContent="space-between" flexWrap="wrap" gap={2} mb={3}>
         <Box>
