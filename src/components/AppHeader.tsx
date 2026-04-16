@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
+import vamLogo from '../assets/ValueMomentum_logo.png';
 import '../styles/AppHeader.css';
 
 interface NavTab {
@@ -33,6 +34,7 @@ export const AppHeader: React.FC = () => {
   return (
     <AppBar position="fixed" elevation={0} className="header-root">
       <Toolbar>
+        <img src={vamLogo} alt="ValueMomentum" style={{ height: 32, marginRight: 12, objectFit: 'contain' }} />
         <Typography className="header-brand" sx={{ color: '#ffffff !important' }}>
           DevOps Agent
         </Typography>
