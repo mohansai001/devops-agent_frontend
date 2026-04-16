@@ -56,6 +56,14 @@ const STATUS_COLOR: Record<string, string> = {
   pending: '#d97706', running: '#009688', done: '#16a34a', failed: '#dc2626', rejected: '#6b7280',
 };
 
+function cleanUrl(url: string): string {
+  return url
+    .replace(/&quot;/gi, '')
+    .replace(/["']/g, '')
+    .replace(/[\u0000-\u001F\u007F-\u009F\u200B-\u200D\uFEFF]/g, '') // strip non-printable & zero-width chars
+    .trim();
+}
+
 function stageState(stageNum: number, currentStage: number, status: string): 'done' | 'active' | 'failed' | 'waiting' {
   if (status === 'done') return 'done';
   if (status === 'failed' && stageNum === currentStage) return 'failed';
@@ -157,7 +165,9 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
   const [stage, setStage]             = useState(approval.pipeline_stage);
   const [stageLogs, setStageLogs]     = useState<Record<string, string[]>>(approval.stage_logs || {});
   const [tech, setTech]               = useState<DetectedTech>(approval.detected_tech || {});
-  const [deployedUrl, setDeployedUrl] = useState<string | null>(approval.deployed_url);
+  const [deployedUrl, setDeployedUrl] = useState<string | null>(
+    approval.deployed_url ? cleanUrl(approval.deployed_url) : null
+  );
   const [actionsUrl, setActionsUrl]   = useState<string | null>(approval.actions_run_url);
   const [expandedStage, setExpandedStage] = useState<number | null>(null);
   const esRef = useRef<EventSource | null>(null);
@@ -165,7 +175,7 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
   // Sync from parent polling
   useEffect(() => { setStatus(approval.status); }, [approval.status]);
   useEffect(() => { setStage(approval.pipeline_stage); }, [approval.pipeline_stage]);
-  useEffect(() => { if (approval.deployed_url) setDeployedUrl(approval.deployed_url); }, [approval.deployed_url]);
+  useEffect(() => { if (approval.deployed_url) setDeployedUrl(cleanUrl(approval.deployed_url)); }, [approval.deployed_url]);
   useEffect(() => { if (approval.actions_run_url) setActionsUrl(approval.actions_run_url); }, [approval.actions_run_url]);
   useEffect(() => {
     if (approval.detected_tech?.language) setTech(approval.detected_tech);
@@ -200,7 +210,7 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
       // Global messages (no stage prefix)
       if (!raw.includes('|')) {
         if (raw.startsWith('Deployed URL')) {
-          const url = raw.replace(/^Deployed URL\s*:\s*/, '').trim();
+          const url = cleanUrl(raw.replace(/^Deployed URL\s*:\s*/, ''));
           if (url) setDeployedUrl(url);
         }
         if (raw.startsWith('Actions Run')) {
@@ -240,7 +250,7 @@ const ApprovalCard: React.FC<CardProps> = ({ approval, onApprove, onReject, onRe
       }
       // Extract deployed URL from stage 2
       if (stageNum === 2 && line.startsWith('Provisioned URL')) {
-        const url = line.replace(/^Provisioned URL\s*:\s*/, '').trim();
+        const url = cleanUrl(line.replace(/^Provisioned URL\s*:\s*/, ''));
         if (url) setDeployedUrl(url);
       }
     };

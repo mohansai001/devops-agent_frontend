@@ -36,7 +36,7 @@ export const AppHeader: React.FC = () => {
       <Toolbar>
         <img src={vamLogo} alt="ValueMomentum" style={{ height: 32, marginRight: 12, objectFit: 'contain' }} />
         <Typography className="header-brand" sx={{ color: '#ffffff !important' }}>
-          DevOps Agent
+          VIDA Cortex
         </Typography>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, mr: 2 }}>
