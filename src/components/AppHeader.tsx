@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
+import vidaLogo from '../assets/VIDA.png';
 import vamLogo from '../assets/ValueMomentum_logo.png';
 import '../styles/AppHeader.css';
 
@@ -33,11 +34,8 @@ export const AppHeader: React.FC = () => {
 
   return (
     <AppBar position="fixed" elevation={0} className="header-root">
-      <Toolbar>
-        <img src={vamLogo} alt="ValueMomentum" style={{ height: 32, marginRight: 12, objectFit: 'contain' }} />
-        <Typography className="header-brand" sx={{ color: '#ffffff !important' }}>
-          VIDA Cortex
-        </Typography>
+      <Toolbar sx={{ minHeight: '64px !important' }}>
+        <img src={vidaLogo} alt="VIDA Cortex" style={{ height: 40, width: 'auto', marginRight: 12, objectFit: 'contain' }} />
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, mr: 2 }}>
           {NAV_TABS.map((tab) => (
@@ -63,6 +61,8 @@ export const AppHeader: React.FC = () => {
         >
           Logout
         </Button>
+
+        <img src={vamLogo} alt="ValueMomentum" style={{ height: 36, width: 'auto', marginLeft: 'auto', objectFit: 'contain' }} />
       </Toolbar>
     </AppBar>
   );
