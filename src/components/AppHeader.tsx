@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
-import vidaLogo from '../assets/VIDA.png';
+import vidaLogo from '../assets/VIDA.jpg';
 import vamLogo from '../assets/ValueMomentum_logo.png';
 import '../styles/AppHeader.css';
 
