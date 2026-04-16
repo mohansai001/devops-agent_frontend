@@ -20,35 +20,40 @@ jobs:
       contents: read
 
     steps:
-      # ✅ Checkout code
+      # Checkout
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # ✅ Use stable Node version (VERY IMPORTANT)
+      # Node setup
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # ✅ Clean environment
+      # Clean everything
       - name: Clean environment
         run: |
           rm -rf node_modules
+          rm -rf package-lock.json
           rm -rf ~/.npm
 
-      # ✅ Install dependencies (stable & deterministic)
+      # Install dependencies with optional deps
       - name: Install dependencies
-        run: npm ci
+        run: npm install --include=optional
 
-      # ✅ Rebuild native modules (fix PostCSS / Rollup issues)
+      # 🔥 Force install Rollup native binary (CRITICAL FIX)
+      - name: Fix Rollup native module
+        run: npm install @rollup/rollup-linux-x64-gnu --save-optional
+
+      # Rebuild native modules
       - name: Rebuild native modules
         run: npm rebuild
 
-      # ✅ Build app
+      # Build app
       - name: Build Application
         run: npm run build
 
-      # ✅ Deploy (skip Oryx build completely)
+      # Deploy
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -56,8 +61,8 @@ jobs:
           action: "upload"
           app_location: "/"
           api_location: ""
-          output_location: "dist"   # 🔥 use "dist" for Vite (change to "build" if React CRA)
-          skip_app_build: true      # 🔥 CRITICAL FIX
+          output_location: "dist"   # Vite
+          skip_app_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
