@@ -104,7 +104,7 @@ function Onboarding() {
   const handleUpdate = async () => {
     setWebhookUpdating(true);
     const pat = import.meta.env.VITE_GITHUB_PAT || '';
-    const base = import.meta.env.VITE_API_BASE_URL || 'https://repo-onboard-full.onrender.com';
+    const base = import.meta.env.VITE_ONBOARD_BASE_URL || 'https://repo-onboard-full.onrender.com';
     try {
       // Step 1: Get PREV_WEBHOOK_URL and CURR_WEBHOOK_URL
       const configRes = await fetch(`${base}/config/webhook-url`);
