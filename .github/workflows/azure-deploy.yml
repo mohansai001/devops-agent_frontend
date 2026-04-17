@@ -8,31 +8,25 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      # Use stable Node version
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: 'npm'   #  speeds up builds
+          node-version: '20'
 
-      # Install dependencies (deterministic)
-      - name: Install dependencies
-        run: npm ci
+      - name: Clean install (fix rollup optional deps bug)
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps
 
-      # Build app
       - name: Build
         run: npm run build
         env:
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
           VITE_GITHUB_PAT: ${{ secrets.VITE_GITHUB_PAT }}
 
-      # Deploy (skip Oryx)
       - name: Deploy to Azure Static Web App
         uses: Azure/static-web-apps-deploy@v1
         with:
