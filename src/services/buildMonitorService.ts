@@ -23,7 +23,7 @@ export interface BuildStatusUpdate {
   run: BuildRun;
 }
 
-const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL || 'wss://https://devops-backend-6c9x.onrender.com/api';
+const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL || 'wss://https://devopsagent-backend-aegmehh9gcetepbf.eastus-01.azurewebsites.net/api';
 
 function isBuildStatusUpdate(value: unknown): value is BuildStatusUpdate {
   return (

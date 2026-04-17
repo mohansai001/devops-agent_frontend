@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://devops-backend-6c9x.onrender.com/api';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://devopsagent-backend-aegmehh9gcetepbf.eastus-01.azurewebsites.net/api';
 
 export const httpClient = axios.create({
   baseURL: BASE_URL,
