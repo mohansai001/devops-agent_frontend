@@ -10,7 +10,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://devops-backend-6c9x.onrender.com',
+        target: 'https://devopsagent-backend-aegmehh9gcetepbf.eastus-01.azurewebsites.net',
         changeOrigin: true
       }
     }
